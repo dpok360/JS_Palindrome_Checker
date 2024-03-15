@@ -1,33 +1,23 @@
-const userInputNum = document.getElementById("user-input");
-const checkBtn = document.getElementById("check-btn");
-const clearBtn = document.getElementById("clear-btn");
-const result = document.getElementById("results-div");
-// Function to check telephone number validity
+const textInput = document.getElementById('text-input');
+const checkBtn = document.getElementById('check-btn');
+const result = document.getElementById('result');
+  
+//  added Event Listener on checkBtn to check palindrome
 
-const phoneNumValidator = () => {
-  const regex =
-    /^1?(\s*[-.]?\s*)?(\(\d{3}\)|\d{3})(\s*[-.]?\s*)?\d{3}(\s*[-.]?\s*)?\d{4}$/;
+checkBtn.addEventListener('click', () => {
+    
+    if(textInput.value === ""){
+        return alert("Please input a value");
+    }
 
-  return regex.test(userInputNum.value);
-};
-
-// Event listener for the check button
-
-checkBtn.addEventListener("click", () => {
-  const userInputValue = userInputNum.value.trim();
-  console.log(userInputNum.value, "userInputValue", "here");
-
-  if (!userInputValue) {
-    return alert("Please provide a phone number");
-  } else if (phoneNumValidator(userInputValue) === true) {
-    return (result.innerText = `Valid US number: ${userInputNum.value}`);
-  } else {
-    return (result.innerText = `Invalid US number: ${userInputNum.value}`);
-  }
+    const  text = textInput.value;
+    const textLowerCase = text.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+    const reverseText = textLowerCase.split('').reverse().join('');
+    if(textLowerCase === reverseText){
+        result.innerText = `${text} is a Palindrome`;
+    }
+    else{
+        result.innerText = `${text} is not a Palindrome`;
+    }
 });
-
-// event listener for the clear button
-clearBtn.addEventListener("click", () => {
-  userInputNum.value = "";
-  result.innerText = "";
-});
+ 
